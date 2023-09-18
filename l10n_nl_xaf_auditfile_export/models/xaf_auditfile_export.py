@@ -142,6 +142,9 @@ class XafAuditfileExport(models.Model):
             del xml
 
             # Validate the generated XML
+
+            huge_parser = etree.XMLParser(huge_tree=True)
+
             xsd = etree.XMLParser(
                 schema=etree.XMLSchema(
                     etree.parse(
@@ -151,7 +154,8 @@ class XafAuditfileExport(models.Model):
                                 "data",
                                 "XmlAuditfileFinancieel3.2.xsd",
                             )
-                        )
+                        ),
+                    parser=huge_parser  
                     )
                 )
             )
